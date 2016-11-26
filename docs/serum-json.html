@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>The serum.json File - Serum</title>
+    <link rel="stylesheet" href="/serum/assets/css/style.css">
+    <link rel="stylesheet" href="/serum/assets/css/prism.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <header id="top">
+        <h1><a href="/serum/">Serum</a></h1>
+        <p>A simple static website generator</p>
+      </header>
+      <nav><ul>
+  <li><a href="/serum/index.html">Home</a></li>
+  <li><a href="/serum/getting-started.html">Getting Started</a></li>
+  <li><a href="/serum/docs/index.html">Docs</a></li>
+  <li><a href="/serum/posts">Posts</a></li>
+</ul>
+</nav>
+      <hr>
+      <main><article>
+  <div>
+    <p><a href="/serum/docs/index.html">Back to the index</a></p>
+<h1>The <code class="inline">serum.json</code> File</h1>
+<p>Every Serum project has its own <code class="inline">serum.json</code> file under the root of the project
+directory. This file holds the project metadata and various project-scoped
+settings. Below is the content of <code class="inline">serum.json</code> which is used to build <em>this
+website</em>.</p>
+<pre><code class="language-javascript">{
+  &quot;site_name&quot;: &quot;Serum&quot;,
+  &quot;site_description&quot;: &quot;A simple static website generator&quot;,
+  &quot;base_url&quot;: &quot;/&quot;,
+  &quot;author_email&quot;: &quot;dalgona@hontou.moe&quot;,
+  &quot;author&quot;: &quot;Dalgona.&quot;,
+  &quot;date_format&quot;: &quot;{WDfull}, {D} {Mshort} {YYYY}&quot;,
+  &quot;preview_length&quot;: 200,
+  &quot;list_title_tag&quot;: &quot;Posts Tagged \&quot;~s\&quot;&quot;
+}</code></pre>
+<p>These are a list of fields currently accepted by Serum:</p>
+<ul>
+<li><p><code class="inline">site_name</code> (string, required)</p>
+<p>The name (or title) of the website. The value of this field is intended to
+be shown in the top of pages and the titlebar of a web browser.</p>
+</li>
+<li><p><code class="inline">site_description</code> (string, required)</p>
+<p>The short description (or subtitle) of the website. Could be shown under
+the banner area of each page.</p>
+</li>
+<li><p><code class="inline">base_url</code> (string, required)</p>
+<p>The root path of the website on the web server. For example, if you want to
+make the front page of the website accessible from <code class="inline">http://example.com/~user/site1/</code>,
+you must set <code class="inline">base_url</code> as <code class="inline">&quot;~user/site1/&quot;</code>.</p>
+<p>Also, you must append a slash (<code class="inline">/</code>) at the end of the path, or the build
+process will fail with JSON validation errors.</p>
+</li>
+<li><p><code class="inline">author</code> (string, required)</p>
+<p>The name of the author (or admin). The main purpose of this field is not
+specified, and it can be used anywhere in the templates (e.g. in the footer
+area of a webpage or in the header area of a blog post)</p>
+</li>
+<li><p><code class="inline">author_email</code> (string, required)</p>
+<p>The email address of the author. The main purpose of this field is not
+specified.</p>
+</li>
+<li><p><code class="inline">date_format</code> (string, <em>optional</em>)</p>
+<p>Determines how the date and time should be represented in blog pages and
+blog post lists. It uses the default formatting language of
+<a href="https://github.com/bitwalker/timex">Timex</a>. Please read
+<a href="https://hexdocs.pm/timex/Timex.Format.DateTime.Formatters.Default.html">this documentation</a>
+for detailed explanation of the formatting syntax.</p>
+<p>If this field is not defined or invalid, <code class="inline">&quot;{YYYY}-{0M}-{0D}&quot;</code> will be used
+as a default format specifier.</p>
+</li>
+<li><p><code class="inline">preview_length</code> (integer, <em>optional</em>)</p>
+<p>Specifies the maximum length of the preview text of each blog post, which
+can be displayed in blog post lists. The default value is <code class="inline">200</code>.</p>
+<p>If you don’t want the preview texts to be displayed, it’s more recommended
+to set <code class="inline">preview_length</code> as zero (rather than removing this field from
+<code class="inline">serum.json</code>), as it disables additional operations for generating preview
+texts.</p>
+</li>
+<li><p><code class="inline">list_title_all</code> (string, <em>optional</em>)</p>
+<p>Sets the title text of “all posts” list page. If not given, <code class="inline">&quot;All Posts&quot;</code>
+will be used as the default title string.</p>
+</li>
+<li><p><code class="inline">list_title_tag</code> (string, <em>optional</em>)</p>
+<p>Defines title text format of tag-filtered list page. The default format is
+<code class="inline">&quot;Posts Tagged ~s&quot;</code>. Note that you must put exactly one <code class="inline">~s</code> in the format
+string, as this is the placeholder for tag name. If you need to display
+<code class="inline">~</code> character in pages, insert <code class="inline">~~</code> (two consecutive tildes).</p>
+</li>
+</ul>
+
+  </div>
+</article>
+</main>
+      <hr>
+      <footer>
+        <p>Copyright &copy; 2016 Dalgona. <a href="https://dalgona.github.io/">[Website]</a> <a href="https://github.com/Dalgona">[GitHub]</a></p>
+        <p>This website was generated by <a href="https://github.com/Dalgona/Serum">Serum</a>.
+      </footer>
+    </div>
+    <script src="/serum/assets/js/prism.js"></script>
+  </body>
+</html>

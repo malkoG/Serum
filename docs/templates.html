@@ -1,0 +1,364 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Templates - Serum</title>
+    <link rel="stylesheet" href="/serum/assets/css/style.css">
+    <link rel="stylesheet" href="/serum/assets/css/prism.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <header id="top">
+        <h1><a href="/serum/">Serum</a></h1>
+        <p>A simple static website generator</p>
+      </header>
+      <nav><ul>
+  <li><a href="/serum/index.html">Home</a></li>
+  <li><a href="/serum/getting-started.html">Getting Started</a></li>
+  <li><a href="/serum/docs/index.html">Docs</a></li>
+  <li><a href="/serum/posts">Posts</a></li>
+</ul>
+</nav>
+      <hr>
+      <main><article>
+  <div>
+    <p><a href="/serum/docs/index.html">Back to the index</a></p>
+<h1>Templates</h1>
+<p>Serum provides five templates you need to define under the <code class="inline">templates</code>
+directory.  Each template file is an <em>Embedded Elixir(EEx)</em> files. Please read
+<a href="http://elixir-lang.org/docs/stable/eex/">the official EEx documentation</a> for
+more information about EEx.</p>
+<h2>Helper Functions</h2>
+<p>There are some accessor and helper functions for use in templates, which are
+listed below. You will need to utilize these functions to make templates that
+really work.</p>
+<h3><code class="inline">site_name/0</code></h3>
+<pre><code class="lang-markup">&lt;%= site_name %&gt;</code></pre>
+<p>returns the name of the website, which are specified in <code class="inline">serum.json</code> file.</p>
+<h3><code class="inline">site_description/0</code></h3>
+<pre><code class="lang-markup">&lt;%= site_description %&gt;</code></pre>
+<p>returns the description (or subtitle) of the website, which are specified
+in <code class="inline">serum.json</code> file.</p>
+<h3><code class="inline">author/0</code></h3>
+<pre><code class="lang-markup">&lt;%= author %&gt;</code></pre>
+<p>returns the value of <code class="inline">author</code> field in <code class="inline">serum.json</code> file.</p>
+<h3><code class="inline">author_email/0</code></h3>
+<pre><code class="lang-markup">&lt;%= author_email %&gt;</code></pre>
+<p>returns the email address of website author specified in <code class="inline">serum.json</code> file.</p>
+<h3><code class="inline">base/1</code></h3>
+<pre><code class="lang-markup">&lt;%= base &quot;assets/css/style.css&quot; %&gt;
+&lt;!-- ==&gt; /base/url/assets/css/style.css --&gt;</code></pre>
+<p>Prepends the base URL in front of the specified path.</p>
+<p>This is the most basic way to reference files and path, but it’s more
+recommended to use the other helper functions below whenever possible, as each
+of those functions does more specific jobs. This function should be used only
+when all of the other helpers don’t satisfy your needs.</p>
+<h3><code class="inline">page/1</code></h3>
+<pre><code class="lang-markup">&lt;%= page &quot;getting-started&quot; %&gt;
+&lt;!-- ==&gt; /base/url/getting-started.html --&gt;
+&lt;%= page &quot;docs/index&quot; %&gt;
+&lt;!-- ==&gt; /base/url/docs/index.html --&gt;
+&lt;%= page &quot;docs/&quot; %&gt;
+&lt;!-- ==&gt; /base/url/docs/.html (may be an undesired output) --&gt;</code></pre>
+<p>This is a shortcut function for accessing pages. Please note that you should
+not put <code class="inline">.html</code> at the end of the path, and passing a directory as an argument
+produces a wrong output.</p>
+<h3><code class="inline">post/1</code></h3>
+<pre><code class="lang-markup">&lt;%= post &quot;2016-11-20-1937-some-post&quot; %&gt;
+&lt;!-- ==&gt; /base/url/posts/2016-11-20-1937-some-post.html --&gt;</code></pre>
+<p>This shortcut function helps accessing blog posts. Like <code class="inline">page/1</code>, you shouldn’t
+append <code class="inline">.html</code> to the name of a post.</p>
+<h3><code class="inline">asset/1</code></h3>
+<pre><code class="lang-markup">&lt;%= asset &quot;js/script.js&quot; %&gt;
+&lt;!-- ==&gt; /base/url/assets/js/script.js --&gt;</code></pre>
+<p>Use this function whenever you need to reference an asset. Calling
+<code class="inline">asset(&quot;path&quot;)</code> is equivalent to calling <code class="inline">base(&quot;/base/url/assets/path&quot;)</code>.</p>
+<p><strong>NOTE:</strong> You may have noticed that there is no helper function for accessing
+media files. This is intended because media files are supposed to be used in
+<em>some</em> pages or blog posts. You can, still, access those files by using
+<code class="inline">base/1</code> function, but in that case you really need to consider moving those
+files into <code class="inline">assets/</code> directory.</p>
+<!-- TODO: add helper for tag index --><h2>List of Required Templates</h2>
+<p>Below is the list of all five templates you need to define, with brief
+illustrations showing the role of each template and what functions or variables
+can be used.</p>
+<h3><code class="inline">templates/base.html.eex</code></h3>
+<svg width="490" viewBox="0 0 490 330" style="background:white">
+  <g transform="translate(5,5)">
+    <rect x="0" y="0" width="480" height="320" style="stroke:#c04078;stroke-width:2px;fill:none"></rect>
+    <rect x="0" y="0" width="480" height="30" style="stroke:none;fill:#c04078"></rect>
+    <text x="10" y="20" style="fill:white;font-family:Inconsolata">&lt;%= page_title %&gt;</text>
+    <g style="opacity:0.5" transform="translate(405,5)">
+      <rect x="0" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="25" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="50" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+    </g>
+    <g transform="translate(10,40)">
+      <rect width="460" height="80" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Header</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= site_name %&gt;</tspan>
+        <tspan x="5" dy="1em" style="font-family:Inconsolata">&lt;%= site_description %&gt;</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,130)">
+      <rect width="460" height="50" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Global Navigation Area</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= navigation %&gt;</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,190)">
+      <rect width="460" height="80" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Main Contents Area</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= contents %&gt;</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,280)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Footer</tspan>
+      </text>
+    </g>
+  </g>
+</svg><p>This template defines the overall structure and look &amp; feel of the website. In
+other words, the root element of the page (<code class="inline">&lt;html&gt;</code>&hellip;<code class="inline">&lt;/html&gt;</code>) should be
+defined here.</p>
+<p>In addition to common helper functions, you need to use the additional
+variables specific to this template, which are:</p>
+<ul>
+<li><p><code class="inline">page_title</code></p>
+<p>The text displayed in the title bar of the web browser. This is usually
+expanded into the title of a page or a blog post.</p>
+</li>
+<li><p><code class="inline">navigation</code></p>
+<p>This variable is replaced by the rendered result of <code class="inline">nav.html.eex</code>.</p>
+</li>
+<li><p><code class="inline">contents</code></p>
+<p>Represents the main contents area. Depending on the type of the page, it’s
+replaced by the rendered result of <code class="inline">page.html.eex</code>, <code class="inline">list.html.eex</code>, or
+<code class="inline">post.html.eex</code>.</p>
+</li>
+</ul>
+<h3><code class="inline">templates/nav.html.eex</code></h3>
+<svg width="490" viewBox="0 0 490 250" style="background:white">
+  <g transform="translate(5,5)">
+    <rect x="0" y="0" width="480" height="240" style="stroke:#c0c0c0;stroke-width:2px;fill:none"></rect>
+    <rect x="0" y="0" width="480" height="30" style="stroke:none;fill:#c0c0c0"></rect>
+    <g style="opacity:0.5" transform="translate(405,5)">
+      <rect x="0" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="25" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="50" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+    </g>
+    <g transform="translate(10,40)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Header</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,80)">
+      <rect x="0.5" y="0.5" width="459" height="69" style="stroke:#c04078;fill:rgba(192,64,120,0.3)"></rect>
+      <text y="20">
+        <tspan x="5" style="fill:#c04078;font-weight:bold">Global Navigation Area</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= base &quot;...&quot; %&gt;</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= page &quot;...&quot; %&gt;</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,160)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Main Contents Area</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,200)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Footer</tspan>
+      </text>
+    </g>
+  </g>
+</svg><p>Defines the appearance of the global navigation area. You can place some
+hyperlinks to pages here. It’s safe to rely on this template for now, but
+later, this template will be superseded by “Includes”, which is the
+generalization of this template and the more flexible way to compose your
+templates.</p>
+<h3><code class="inline">templates/page.html.eex</code></h3>
+<svg width="490" viewBox="0 0 490 230" style="background:white">
+  <g transform="translate(5,5)">
+    <rect x="0" y="0" width="480" height="220" style="stroke:#c0c0c0;stroke-width:2px;fill:none"></rect>
+    <rect x="0" y="0" width="480" height="30" style="stroke:none;fill:#c0c0c0"></rect>
+    <g style="opacity:0.5" transform="translate(405,5)">
+      <rect x="0" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="25" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="50" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+    </g>
+    <g transform="translate(10,40)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Header</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,80)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Global Navigation Area</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,120)">
+      <rect x="0.5" y="0.5" width="459" height="49" style="stroke:#c04078;stroke-width:1px;fill:rgba(192,64,120,0.3)"></rect>
+      <text y="20">
+        <tspan x="5" style="fill:#c04078;font-weight:bold">Main Contents Area</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= contents %&gt;</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,180)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Footer</tspan>
+      </text>
+    </g>
+  </g>
+</svg><p>This template does only one job: Wrapping the contents of a page. When building
+a page, the HTML converted from a markdown file will be wrapped by this
+template, and the wrapped contents will finally be wrapped again, by
+<code class="inline">base.html.eex</code>.</p>
+<h3><code class="inline">templates/list.html.eex</code></h3>
+<svg width="490" viewBox="0 0 490 290" style="background:white">
+  <g transform="translate(5,5)">
+    <rect x="0" y="0" width="480" height="280" style="stroke:#c0c0c0;stroke-width:2px;fill:none"></rect>
+    <rect x="0" y="0" width="480" height="30" style="stroke:none;fill:#c0c0c0"></rect>
+    <g style="opacity:0.5" transform="translate(405,5)">
+      <rect x="0" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="25" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="50" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+    </g>
+    <g transform="translate(10,40)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Header</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,80)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Global Navigation Area</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,120)">
+      <rect x="0.5" y="0.5" width="459" height="109" style="stroke:#c04078;stroke-width:1px;fill:rgba(192,64,120,0.3)"></rect>
+      <text y="20">
+        <tspan x="5" style="fill:#c04078;font-weight:bold">Main Contents Area</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= header %&gt;</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= for p <- posts do %&gt;</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">...</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;% end %&gt;</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,240)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Footer</tspan>
+      </text>
+    </g>
+  </g>
+</svg><p>Defines the appearance of the blog post list. Place these variables in
+appropriate position:</p>
+<ul>
+<li><p><code class="inline">header</code></p>
+<p>The title text of the list page such as <em>“All Posts”</em> or <em>“Posts tagged
+…”</em>. You can set the format of this text in <code class="inline">serum.json</code>.</p>
+</li>
+<li><p><code class="inline">posts</code></p>
+<p>An enumerable of maps containing post metadata, sorted by date in
+descending order. Following is the list of keys and description of values.</p>
+<ul>
+<li><code class="inline">url</code>: URL of this blog post
+  (e.g., <code class="inline">/base/url/posts/YYYY-MM-DD-hhmm-post.html</code>)
+</li>
+<li><code class="inline">title</code>: Title of this blog post
+</li>
+<li><code class="inline">date</code>: Formatted representation of date when this post has been written
+</li>
+<li><code class="inline">tags</code>: An enumerable containing tag information
+</li>
+</ul>
+<p>Each item in <code class="inline">tags</code> enumerable is also a map. Its keys are:</p>
+<ul>
+<li><code class="inline">list_url</code>: URL of the list of posts with this tag.
+</li>
+<li><code class="inline">name</code>: Name of this tag.
+</li>
+</ul>
+</li>
+</ul>
+<h3><code class="inline">templates/post.html.eex</code></h3>
+<svg width="490" viewBox="0 0 490 290" style="background:white">
+  <g transform="translate(5,5)">
+    <rect x="0" y="0" width="480" height="280" style="stroke:#c0c0c0;stroke-width:2px;fill:none"></rect>
+    <rect x="0" y="0" width="480" height="30" style="stroke:none;fill:#c0c0c0"></rect>
+    <g style="opacity:0.5" transform="translate(405,5)">
+      <rect x="0" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="25" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+      <rect x="50" y="0" width="20" height="20" style="stroke:none;fill:white"></rect>
+    </g>
+    <g transform="translate(10,40)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Header</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,80)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Global Navigation Area</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,120)">
+      <rect x="0.5" y="0.5" width="459" height="109" style="stroke:#c04078;stroke-width:1px;fill:rgba(192,64,120,0.3)"></rect>
+      <text y="20">
+        <tspan x="5" style="fill:#c04078;font-weight:bold">Main Contents Area</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= title %&gt;</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= date %&gt;</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= for t <- tags do %&gt; ... &lt;% end %&gt;</tspan>
+        <tspan x="5" dy="1.2em" style="font-family:Inconsolata">&lt;%= contents %&gt;</tspan>
+      </text>
+    </g>
+    <g transform="translate(10,240)">
+      <rect width="460" height="30" style="stroke:none;fill:rgba(0,0,0,0.1)"></rect>
+      <text y="20">
+        <tspan x="5" style="opacity:0.5">Site Footer</tspan>
+      </text>
+    </g>
+  </g>
+</svg><p>This template formats blog post pages. Use these variables in appropriate
+places:</p>
+<ul>
+<li><p><code class="inline">title</code></p>
+<p>Title of this blog post.</p>
+</li>
+<li><p><code class="inline">date</code></p>
+<p>Formatted string representation of date when this post has been written.</p>
+</li>
+<li><p><code class="inline">tags</code></p>
+<p>An enumerable containg tag information. Please see the description for
+<code class="inline">list.html.eex</code> above for detailed description on this variable.</p>
+</li>
+<li><p><code class="inline">contents</code></p>
+<p>The HTML code converted from the source markdown file.</p>
+</li>
+</ul>
+
+  </div>
+</article>
+</main>
+      <hr>
+      <footer>
+        <p>Copyright &copy; 2016 Dalgona. <a href="https://dalgona.github.io/">[Website]</a> <a href="https://github.com/Dalgona">[GitHub]</a></p>
+        <p>This website was generated by <a href="https://github.com/Dalgona/Serum">Serum</a>.
+      </footer>
+    </div>
+    <script src="/serum/assets/js/prism.js"></script>
+  </body>
+</html>
