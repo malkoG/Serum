@@ -1,93 +1,11 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>Writing Blog Posts - Serum</title>
-    <link rel="stylesheet" href="/Serum/assets/css/style.css">
-    <link rel="stylesheet" href="/Serum/assets/css/prism.css">
-  </head>
-  <body>
-    <div id="wrapper">
-      <header id="top">
-        <h1><a href="/Serum/">Serum</a></h1>
-        <p>A simple static website generator</p>
-      </header>
-      <nav><ul>
-  <li><a href="/Serum/index.html">Home</a></li>
-  <li><a href="/Serum/getting-started.html">Getting Started</a></li>
-  <li><a href="/Serum/docs/index.html">Docs</a></li>
-  <li><a href="/Serum/posts">Posts</a></li>
-</ul>
-</nav>
-      <hr>
-      <main><article>
-  <div>
-    <p><a href="/Serum/docs/index.html">Back to the index</a></p>
-<h1>Writing Blog Posts</h1>
-<p>Serum is a blog-aware static website generator and it provides an easy way to
-write blog posts. All you need to do is naming the markdown file properly and
-writing the first two lines of each markdown file appropriately.</p>
-<h2>Source File Naming Rules</h2>
-<p>All blog post source files should be located under <code class="inline">posts</code> subdirectory of your
-project directory, and should be named according to the following format:</p>
-<pre><code class="">YYYY-MM-DD-hhmm-&lt;title-slug&gt;.md</code></pre>
-<p>The first four parts delimited by a hypen (<code class="inline">-</code>) represents the date of the blog
-post.</p>
-<ul>
-<li><code class="inline">YYYY</code> &mdash; Four digits of the year. (e.g. <code class="inline">2016</code>)
-</li>
-<li><code class="inline">MM</code> &mdash; Two digits of the month, zero padded. (e.g. <code class="inline">05</code>, <code class="inline">11</code>)
-</li>
-<li><code class="inline">DD</code> &mdash; Two digits of the date, zero padded. (e.g. <code class="inline">03</code>, <code class="inline">27</code>)
-</li>
-<li><code class="inline">hhmm</code> &mdash; Two digits of the hours in 24-hour format (0-23), followed by
-  two digits of the minutes (0-59). Each field is zero padded.
-  (e.g. <code class="inline">0947</code>, <code class="inline">2205</code>)
-</li>
-</ul>
-<p>Followings are examples of valid source file names:</p>
-<pre><code class="">2016-07-28-1945-hello-world.md
+<!DOCTYPE html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,user-scalable=no"><title>Writing Blog Posts - Serum</title><link rel=stylesheet href=/Serum/assets/css/style.css><link rel=stylesheet href=/Serum/assets/css/prism.css><div id=wrapper><header id=top><h1><a href=/Serum/ >Serum</a></h1><p>A simple static website generator</header><nav><ul><li><a href=/Serum/index.html>Home</a><li><a href=/Serum/getting-started.html>Getting Started</a><li><a href=/Serum/docs/index.html>Docs</a><li><a href=/Serum/posts>Posts</a></ul></nav><hr><main><article><div><p><a href=/Serum/docs/index.html>Back to the index</a><h1>Writing Blog Posts</h1><p>Serum is a blog-aware static website generator and it provides an easy way to write blog posts. All you need to do is naming the markdown file properly and writing the first two lines of each markdown file appropriately.<h2>Source File Naming Rules</h2><p>All blog post source files should be located under <code class=inline>posts</code> subdirectory of your project directory, and should be named according to the following format:<pre><code>YYYY-MM-DD-hhmm-&lt;title-slug&gt;.md</code></pre><p>The first four parts delimited by a hypen (<code class=inline>-</code>) represents the date of the blog post.<ul><li><code class=inline>YYYY</code> &mdash; Four digits of the year. (e.g. <code class=inline>2016</code>)<li><code class=inline>MM</code> &mdash; Two digits of the month, zero padded. (e.g. <code class=inline>05</code>, <code class=inline>11</code>)<li><code class=inline>DD</code> &mdash; Two digits of the date, zero padded. (e.g. <code class=inline>03</code>, <code class=inline>27</code>)<li><code class=inline>hhmm</code> &mdash; Two digits of the hours in 24-hour format (0-23), followed by two digits of the minutes (0-59). Each field is zero padded. (e.g. <code class=inline>0947</code>, <code class=inline>2205</code>)</ul><p>Followings are examples of valid source file names:<pre><code>2016-07-28-1945-hello-world.md
 2016-09-14-1027-about-gen-server-in-elixir.md
-2016-10-06-1409-serum-is-awesome.md</code></pre>
-<h2>Providing Metadata</h2>
-<p>The first two lines of each markdown file are reserved for the post metadata.
-In the first line is the title of the post, and in the next line is a list of
-tags delimited by a comma (<code class="inline">,</code>). These two lines must start with a pound sign
-directly followed by a space (<code class="inline">&#39;# &#39;</code>).</p>
-<p>Following is an example of a valid source markdown file:</p>
-<pre><code class="language-markdown"># About GenServer in Elixir
+2016-10-06-1409-serum-is-awesome.md</code></pre><h2>Providing Metadata</h2><p>The first two lines of each markdown file are reserved for the post metadata. In the first line is the title of the post, and in the next line is a list of tags delimited by a comma (<code class=inline>,</code>). These two lines must start with a pound sign directly followed by a space (<code class=inline>&#39;# &#39;</code>).<p>Following is an example of a valid source markdown file:<pre><code class=language-markdown># About GenServer in Elixir
 # elixir,otp,study
 
-Lorem ipsum dolor sit amet ...</code></pre>
-<p>Serum doesn’t care about spaces between a comma and the next tag, so below is
-also a valid tag line:</p>
-<pre><code class="language-markdown"># elixir, otp, study</code></pre>
-<p>Even if a post is not supposed to have any tag, you should leave the pound sign
-in the second line. In this case, the trailing space right after the pound sign
-is not required.</p>
-<p>So this markdown file is valid:</p>
-<pre><code class="language-markdown"># My First Post!
+Lorem ipsum dolor sit amet ...</code></pre><p>Serum doesn’t care about spaces between a comma and the next tag, so below is also a valid tag line:<pre><code class=language-markdown># elixir, otp, study</code></pre><p>Even if a post is not supposed to have any tag, you should leave the pound sign in the second line. In this case, the trailing space right after the pound sign is not required.<p>So this markdown file is valid:<pre><code class=language-markdown># My First Post!
 #
 
-Lorem ipsum dolor sit amet ...</code></pre>
-<p>While this one is <em>invalid</em>:</p>
-<pre><code class="language-markdown"># My First Post!
+Lorem ipsum dolor sit amet ...</code></pre><p>While this one is <em>invalid</em>:<pre><code class=language-markdown># My First Post!
 
-Lorem ipsum dolor sit amet ...</code></pre>
-<p><strong>NOTE:</strong> Although the first two lines of source markdown files look like
-“Heading 1” block, this part is not parsed as a markdown code. Every special
-character you put in here will be displayed as is.</p>
-
-  </div>
-</article>
-</main>
-      <hr>
-      <footer>
-        <p>Copyright &copy; 2016 Dalgona. <a href="https://dalgona.github.io/">[Website]</a> <a href="https://github.com/Dalgona">[GitHub]</a></p>
-        <p>This website was generated by <a href="https://github.com/Dalgona/Serum">Serum</a>.
-      </footer>
-    </div>
-    <script src="/Serum/assets/js/prism.js"></script>
-  </body>
-</html>
+Lorem ipsum dolor sit amet ...</code></pre><p><strong>NOTE:</strong> Although the first two lines of source markdown files look like “Heading 1” block, this part is not parsed as a markdown code. Every special character you put in here will be displayed as is.</div></article></main><hr><footer><p>Copyright &copy; 2016 Dalgona. <a href=https://dalgona.github.io/ >[Website]</a> <a href=https://github.com/Dalgona>[GitHub]</a><p>This website was generated by <a href=https://github.com/Dalgona/Serum>Serum</a>.</footer></div><script src=/Serum/assets/js/prism.js></script>
